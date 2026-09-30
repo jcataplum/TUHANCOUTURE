@@ -32,9 +32,7 @@ Por defecto funciona en **modo demostración**: el catálogo de ejemplo, el inve
 
 Todo está en [`js/config.js`](js/config.js). Lo que dice `null` se oculta en la tienda (en modo demostración aparece "por configurar"):
 
-- **Facebook**: enlace oficial.
-- **Correo** de atención.
-- **Horario** de la tienda física.
+- ~~Facebook, correo y horario~~ ✔ (couturetuhan@gmail.com · lunes a sábado 11:00 a. m. – 7:30 p. m.).
 - **Ciudad**: se dejó "Bello, Antioquia" (C.C. Estación Niquía); confirmar.
 - **WhatsApp**: se usó el número publicado en Instagram (311 673 3231); confirmar.
 - **Envíos**: tarifa (15.000) y envío gratis desde 250.000 son **valores de ejemplo**.

@@ -58,13 +58,13 @@ export const CONFIG = {
     // Número publicado en el Instagram de la marca. Confirmar que es el de WhatsApp.
     whatsapp: '573116733231',
     phone: '311 673 3231',
-    email: null,                  // PENDIENTE
+    email: 'couturetuhan@gmail.com',
     whatsappMessage: 'Hola TUHAN COUTURE, quiero información sobre sus jeans.'
   },
 
   social: {
     instagram: 'https://www.instagram.com/tuhan__couture/',
-    facebook: null,               // PENDIENTE: enlace oficial de Facebook
+    facebook: 'https://www.facebook.com/share/1DDTnwh8LN/',
     tiktok: 'https://www.tiktok.com/@tuhan_couture'
   },
 
@@ -72,7 +72,7 @@ export const CONFIG = {
   store: {
     address: 'Centro Comercial Estación Niquía, local 107',
     city: 'Bello, Antioquia',     // confirmar
-    hours: null,                  // PENDIENTE. Ej: ['Lunes a sábado: 10:00 a. m. – 8:00 p. m.', 'Domingos y festivos: 11:00 a. m. – 7:00 p. m.']
+    hours: ['Lunes a sábado: 11:00 a. m. – 7:30 p. m.'],
     mapsUrl: null                 // opcional: enlace exacto de Google Maps; si es null se busca por dirección
   },
 
