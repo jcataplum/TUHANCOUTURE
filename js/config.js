@@ -34,7 +34,9 @@ export const CONFIG = {
     provider: 'wompi',
     wompiPublicKey: null,   // pub_prod_... o pub_test_...
     // Medios que se muestran en el footer y el checkout (los habilita Wompi en tu cuenta)
-    methods: ['Tarjeta crédito', 'Tarjeta débito', 'PSE', 'Nequi', 'Botón Bancolombia', 'Bancolombia QR', 'Efectivo en corresponsales']
+    methods: ['Tarjeta crédito', 'Tarjeta débito', 'PSE', 'Nequi', 'Botón Bancolombia', 'Bancolombia QR', 'Efectivo en corresponsales'],
+    // Compra a crédito: no pasa por Wompi. Se muestran aparte y se coordinan por WhatsApp o en la tienda.
+    credit: ['Sistecrédito', 'Addi', 'Credimio']
   },
 
   /* ---------- Envíos (AJUSTAR: valores de ejemplo) ---------- */

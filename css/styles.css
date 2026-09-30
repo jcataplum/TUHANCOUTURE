@@ -495,3 +495,5 @@ body.no-scroll .wa-float { display: none; }
 @keyframes shimmer { to { background-position: -200% 0; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 .spinner { width: 28px; height: 28px; border: 2px solid var(--line); border-top-color: var(--gold-3); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto; }
+.pay-sub { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-2); margin: 18px 0 0; }
+.pay-list li.pay-credit { border-style: dashed; }

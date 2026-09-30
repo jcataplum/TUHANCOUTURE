@@ -300,7 +300,11 @@ function renderFooter() {
     <div class="container footer-pay">
       <h3>${icon.card} Medios de pago</h3>
       <ul class="pay-list">${CONFIG.payments.methods.map(m => `<li>${esc(m)}</li>`).join('')}</ul>
-      <p class="small">${icon.shield} Pagos procesados de forma segura por ${CONFIG.payments.provider === 'wompi' ? 'Wompi (Bancolombia)' : esc(CONFIG.payments.provider)}.</p>
+      <p class="small">${icon.shield} Pagos en línea procesados de forma segura por ${CONFIG.payments.provider === 'wompi' ? 'Wompi (Bancolombia)' : esc(CONFIG.payments.provider)}.</p>
+      ${(CONFIG.payments.credit || []).length ? `
+        <p class="pay-sub">Compra a crédito</p>
+        <ul class="pay-list">${CONFIG.payments.credit.map(m => `<li class="pay-credit">${esc(m)}</li>`).join('')}</ul>
+        ${wa ? `<p class="small"><a href="${esc(whatsappLink('Hola TUHAN COUTURE, quiero comprar a crédito con ' + CONFIG.payments.credit.join(', ') + '. ¿Cómo lo hago?'))}" target="_blank" rel="noopener">${icon.whatsapp} Pregúntanos cómo comprar a crédito</a></p>` : ''}` : ''}
     </div>
 
     <div class="footer-bottom">

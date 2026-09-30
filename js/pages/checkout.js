@@ -1,4 +1,4 @@
-import { CONFIG } from '../config.js';
+import { CONFIG, whatsappLink } from '../config.js';
 import { initLayout, loadProducts } from '../core/layout.js';
 import { api, isDemo, ORDERS_KEY } from '../core/api.js';
 import { Cart } from '../core/cart.js';
@@ -87,6 +87,9 @@ function renderForm(lines) {
             ? '<p class="notice">Modo demostración: al pagar verás una pasarela <strong>de prueba</strong> para aprobar o rechazar el pago. No se cobra nada.</p>'
             : `<p class="notice">Al continuar te llevaremos a <strong>Wompi (Bancolombia)</strong>, la pasarela segura donde eliges tu medio de pago. Tu pedido se confirma solo cuando Wompi aprueba el pago.</p>`}
           <ul class="pay-list" style="margin:0">${CONFIG.payments.methods.map(m => `<li style="border-color:var(--line);background:var(--cream)">${esc(m)}</li>`).join('')}</ul>
+          ${(CONFIG.payments.credit || []).length && whatsappLink() ? `
+            <p class="small muted" style="margin:0">¿Prefieres comprar a crédito con ${esc(CONFIG.payments.credit.join(', ').replace(/, ([^,]*)$/, ' o $1'))}?
+              <a href="${esc(whatsappLink('Hola TUHAN COUTURE, quiero comprar a crédito con ' + CONFIG.payments.credit.join(', ') + '. ¿Cómo lo hago?'))}" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.</p>` : ''}
           <label class="check"><input type="checkbox" id="terms" required>
             <span>Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a> y la <a href="cambios-devoluciones.html" target="_blank">política de cambios y devoluciones</a>.</span></label>
           <label class="check"><input type="checkbox" id="privacy" required>

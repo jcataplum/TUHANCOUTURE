@@ -50,7 +50,7 @@ const PAGES = {
       <h2>Precios y disponibilidad</h2>
       <p>Los precios están en pesos colombianos (COP) e incluyen IVA cuando aplica. El inventario se muestra por talla y se aparta al iniciar el pago; si el pago no se completa, se libera. Un pedido se confirma solo cuando la pasarela de pagos aprueba la transacción.</p>
       <h2>Medios de pago</h2>
-      <p>Pagos procesados por ${CONFIG.payments.provider === 'wompi' ? 'Wompi (Bancolombia)' : esc(CONFIG.payments.provider)}: ${CONFIG.payments.methods.map(esc).join(', ')}.</p>
+      <p>Pagos procesados por ${CONFIG.payments.provider === 'wompi' ? 'Wompi (Bancolombia)' : esc(CONFIG.payments.provider)}: ${CONFIG.payments.methods.map(esc).join(', ')}.${(CONFIG.payments.credit || []).length ? ` También recibimos compras a crédito con ${CONFIG.payments.credit.map(esc).join(', ').replace(/, ([^,]*)$/, ' y $1')}, sujetas a la aprobación de cada entidad.` : ''}</p>
       <h2>Envíos</h2>
       <p>Enviamos a todo Colombia. Tiempo estimado: ${esc(CONFIG.shipping.estimatedDays)} después de confirmado el pago. Costo de envío: ${cop(CONFIG.shipping.nationalRate)}${CONFIG.shipping.freeShippingFrom != null ? `, gratis en compras desde ${cop(CONFIG.shipping.freeShippingFrom)}` : ''}${CONFIG.shipping.storePickup ? '. También puedes recoger gratis en nuestra tienda física' : ''}. <mark>[confirmar transportadora y tiempos]</mark></p>
       <h2>Derecho de retracto</h2>
