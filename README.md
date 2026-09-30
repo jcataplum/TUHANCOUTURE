@@ -58,13 +58,13 @@ Proyecto creado: **TUHAN COUTURE** (`vfyqwgrywcmxddutwhur`, región us-east-1, p
 
 1. ~~Crear un proyecto en Supabase~~ ✔
 2. ~~Ejecutar la migración~~ ✔
-3. Crear la cuenta de administración en *Authentication → Users → Add user* y darle permisos:
+3. ~~Cuenta de administración~~ ✔ (jenifer.duque@gmail.com). Para agregar otra: *Authentication → Users → Add user* y darle permisos:
    ```sql
    insert into public.admins (user_id) select id from auth.users where email = 'correo-admin@...';
    ```
 4. En *Authentication → Settings*, **desactivar el registro público** ("Allow new users to sign up"): solo el equipo usa cuentas.
 5. Ajustar envío en la tabla `store_settings` para que coincida con `js/config.js`.
-6. En `js/config.js` ya están `supabaseUrl` y `supabaseAnonKey`; solo falta cambiar `backend.mode` a `'supabase'` cuando haya productos y pagos configurados.
+6. En `js/config.js` ya están `supabaseUrl` y `supabaseAnonKey`. El **panel** ya usa Supabase (`backend.adminMode = 'supabase'`); la **tienda** sigue en demostración hasta cambiar `backend.mode` a `'supabase'`, cuando haya productos y pagos configurados.
 7. Cargar los productos reales desde `admin.html`.
 
 ### 2. Wompi (pagos: tarjetas, PSE, Nequi, Botón Bancolombia, etc.)

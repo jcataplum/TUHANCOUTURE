@@ -388,5 +388,10 @@ function resizeImage(file, max, quality, asBlob = false) {
   });
 }
 
+/** Tienda */
 export const api = CONFIG.backend.mode === 'supabase' ? new SupabaseApi() : new DemoApi();
 export const isDemo = api.mode === 'demo';
+
+/** Panel administrativo: puede usar la base de datos real aunque la tienda siga en demostración */
+const adminMode = CONFIG.backend.adminMode || CONFIG.backend.mode;
+export const adminApi = adminMode === api.mode ? api : (adminMode === 'supabase' ? new SupabaseApi() : new DemoApi());

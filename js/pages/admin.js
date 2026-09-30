@@ -3,13 +3,17 @@
    tallas, colores, inventario, pedidos, clientes y promociones)
    ========================================================= */
 import { CONFIG } from '../config.js';
-import { api, isDemo, ORDER_STATUS } from '../core/api.js';
+import { adminApi as api, api as storeApi, ORDER_STATUS } from '../core/api.js';
 import { icon, statusBadge } from '../core/components.js';
 import {
   $, $$, cop, esc, fold, fmtDateTime, productImage, sortSizes, stockBadge, stockState, totalStock, toast, busy
 } from '../core/util.js';
 
 const root = $('#adminRoot');
+const isDemo = api.mode === 'demo';
+// ¿La tienda publicada ya muestra estos mismos datos?
+const storeLive = storeApi.mode === api.mode;
+const STORE_PENDING = 'La tienda publicada sigue en modo demostración: lo que cargues aquí se mostrará a los clientes cuando se active la base de datos en la tienda.';
 const SECTIONS = [
   ['resumen', 'Resumen', icon.store],
   ['productos', 'Productos', icon.bag],
@@ -137,6 +141,7 @@ async function viewSummary() {
   main.innerHTML = `
     ${head('Resumen', isDemo ? 'Modo demostración: catálogo, pedidos y pagos de prueba.' : 'Estado general de la tienda.',
       isDemo ? '<button class="btn btn-line btn-sm" type="button" id="resetDemo">Restablecer datos de ejemplo</button>' : '')}
+    ${storeLive ? '' : `<p class="notice" style="margin-bottom:20px">${STORE_PENDING}</p>`}
     <div class="kpis">
       <div class="kpi"><b>${cop(revenue)}</b><span>Ventas pagadas</span></div>
       <div class="kpi"><b>${paid.length}</b><span>Pedidos pagados</span></div>
@@ -197,7 +202,7 @@ async function viewProducts() {
           ${p.featured ? '<br><small class="muted">Destacado</small>' : ''}${p.isNew ? '<br><small class="muted">Nuevo</small>' : ''}</td>
         <td><div class="actions">
           <a class="btn btn-line btn-sm" href="#producto/${encodeURIComponent(p.id)}">Editar</a>
-          ${p.published ? `<a class="btn btn-ghost btn-sm" href="producto.html?p=${encodeURIComponent(p.slug)}" target="_blank" rel="noopener">Ver</a>` : ''}
+          ${p.published && storeLive ? `<a class="btn btn-ghost btn-sm" href="producto.html?p=${encodeURIComponent(p.slug)}" target="_blank" rel="noopener">Ver</a>` : ''}
           <button class="btn btn-ghost btn-sm" type="button" data-del="${esc(p.id)}">Eliminar</button>
         </div></td>
       </tr>`).join('') || '<tr><td colspan="7" class="muted">No hay productos.</td></tr>';
