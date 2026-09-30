@@ -1,4 +1,4 @@
-import { CONFIG } from '../config.js';
+import { CONFIG, whatsappLink } from '../config.js';
 import { initLayout, loadProducts } from '../core/layout.js';
 import { productCard, skeletonCards } from '../core/components.js';
 import { $, esc, fold, observeReveal, setMeta, sortSizes, totalStock } from '../core/util.js';
@@ -96,6 +96,14 @@ function render() {
     : 'Jeans y denim de marca 100% colombiana, con tallas e inventario en tiempo real.';
   $('#catCount').textContent = `${list.length} ${list.length === 1 ? 'producto' : 'productos'}`;
   setMeta({ title: `${title} · ${CONFIG.brand.name}` });
+
+  if (!products.length) {
+    const wa = whatsappLink('Hola TUHAN COUTURE, quiero conocer los jeans disponibles.');
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><p class="script">Muy pronto</p>
+      <p>Estamos cargando nuestro catálogo en línea. Mientras tanto, pregúntanos por las referencias disponibles.</p>
+      ${wa ? `<a class="btn btn-wa" href="${esc(wa)}" target="_blank" rel="noopener">Ver disponibles por WhatsApp</a>` : ''}</div>`;
+    return;
+  }
 
   grid.innerHTML = list.length
     ? list.map((p, i) => productCard(p, { eager: i < 4 })).join('')

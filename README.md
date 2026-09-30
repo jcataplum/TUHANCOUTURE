@@ -62,7 +62,7 @@ Proyecto creado: **TUHAN COUTURE** (`vfyqwgrywcmxddutwhur`, región us-east-1, p
    ```
 4. En *Authentication → Settings*, **desactivar el registro público** ("Allow new users to sign up"): solo el equipo usa cuentas.
 5. Ajustar envío en la tabla `store_settings` para que coincida con `js/config.js`.
-6. En `js/config.js` ya están `supabaseUrl` y `supabaseAnonKey`. El **panel** ya usa Supabase (`backend.adminMode = 'supabase'`); la **tienda** sigue en demostración hasta cambiar `backend.mode` a `'supabase'`, cuando haya productos y pagos configurados.
+6. ~~Conectar la tienda y el panel~~ ✔ (`backend.mode` y `backend.adminMode` = `'supabase'`). Mientras no haya llave pública de Wompi, el checkout no cobra en línea: arma el pedido y lo envía por WhatsApp (sin crear el pedido ni apartar inventario).
 7. Cargar los productos reales desde `admin.html`.
 
 ### 2. Wompi (pagos: tarjetas, PSE, Nequi, Botón Bancolombia, etc.)

@@ -22,7 +22,7 @@ export const CONFIG = {
      'demo'     → catálogo, inventario y pedidos de prueba guardados en este navegador.
      'supabase' → base de datos real (ver README: supabase/migrations y supabase/functions). */
   backend: {
-    mode: 'demo',           // tienda: cambiar a 'supabase' cuando haya productos cargados y Wompi configurado
+    mode: 'supabase',       // tienda: base de datos real ('demo' = catálogo de ejemplo en el navegador)
     adminMode: 'supabase',  // panel administrativo: ya trabaja con la base de datos real (pide iniciar sesión)
     // Proyecto Supabase "TUHAN COUTURE" (us-east-1). La clave publicable está pensada para el navegador.
     supabaseUrl: 'https://vfyqwgrywcmxddutwhur.supabase.co',

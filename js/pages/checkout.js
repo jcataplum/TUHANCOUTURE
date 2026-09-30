@@ -8,6 +8,10 @@ import { $, $$, cop, esc, productImage, toast } from '../core/util.js';
 
 initLayout();
 
+// Sin llave de Wompi no hay cobro en línea: la compra se termina por WhatsApp
+// (no se crea el pedido, así no se aparta inventario sin pago).
+const onlinePayments = isDemo || !!CONFIG.payments.wompiPublicKey;
+
 
 const DEPARTMENTS = ['Amazonas', 'Antioquia', 'Arauca', 'Atlántico', 'Bogotá D.C.', 'Bolívar', 'Boyacá', 'Caldas', 'Caquetá', 'Casanare',
   'Cauca', 'Cesar', 'Chocó', 'Córdoba', 'Cundinamarca', 'Guainía', 'Guaviare', 'Huila', 'La Guajira', 'Magdalena', 'Meta', 'Nariño',
@@ -35,7 +39,7 @@ let method = 'shipping';
     const subtotal = lines.reduce((s, l) => s + l.unitPrice * l.qty, 0);
     promo = await api.findPromotion(code, subtotal).catch(() => null);
   }
-  renderForm(lines);
+  if (onlinePayments) renderForm(lines); else renderWhatsappCheckout(lines);
 })();
 
 function field(id, label, input, hint = '') {
@@ -236,4 +240,54 @@ function demoPayment(order) {
       };
     });
   });
+}
+
+/** Checkout mientras los pagos en línea no están activos: resumen y envío del pedido por WhatsApp */
+function renderWhatsappCheckout(lines) {
+  let delivery = 'shipping';
+  const draw = () => {
+    const totals = quote(lines.map(l => ({ unitPrice: l.unitPrice, qty: l.qty })), { method: delivery, promo });
+    // El mensaje solo lleva productos y totales; los datos personales se piden en la conversación
+    const msg = ['Hola TUHAN COUTURE, quiero hacer este pedido:', '',
+      ...lines.map(l => `• ${l.qty} x ${l.product.name} (Ref. ${l.product.ref}) · ${l.variant.color} · Talla ${l.variant.size} · ${cop(l.unitPrice * l.qty)}`),
+      '', `Subtotal: ${cop(totals.subtotal)}`,
+      ...(totals.discount ? [`Descuento (${promo.code}): -${cop(totals.discount)}`] : []),
+      `${delivery === 'pickup' ? 'Recojo en tienda' : 'Envío'}: ${totals.shipping ? cop(totals.shipping) : 'Gratis'}`,
+      `Total: ${cop(totals.total)}`].join('\n');
+    const wa = whatsappLink(msg);
+    root.innerHTML = `
+      <div class="checkout-layout">
+        <section class="form-section" aria-labelledby="waTitle">
+          <h2 id="waTitle">${icon.whatsapp} Finaliza tu compra por WhatsApp</h2>
+          <p class="notice">Muy pronto podrás pagar en línea con tarjeta, PSE, Nequi y más. Por ahora, envíanos tu pedido por WhatsApp:
+            confirmamos disponibilidad, tomamos tus datos de entrega y te indicamos cómo pagar.</p>
+          ${CONFIG.shipping.storePickup ? `
+          <div class="radio-cards" role="radiogroup" aria-label="Método de entrega">
+            <label class="radio-card"><input type="radio" name="method" value="shipping" ${delivery === 'shipping' ? 'checked' : ''}>
+              <span><strong>Envío a domicilio</strong><small>Todo Colombia · ${esc(CONFIG.shipping.estimatedDays)}</small></span></label>
+            <label class="radio-card"><input type="radio" name="method" value="pickup" ${delivery === 'pickup' ? 'checked' : ''}>
+              <span><strong>Recoger en tienda · gratis</strong><small>${esc(CONFIG.store.address)}</small></span></label>
+          </div>` : ''}
+          ${wa ? `<a class="btn btn-wa btn-block" href="${esc(wa)}" target="_blank" rel="noopener">${icon.whatsapp} Enviar pedido por WhatsApp</a>`
+               : '<p class="text-danger">Escríbenos por nuestras redes para finalizar tu compra.</p>'}
+          <p class="small muted" style="margin:0">Al comprar aceptas los <a href="terminos.html">términos y condiciones</a> y la <a href="privacidad.html">política de privacidad</a>.</p>
+        </section>
+        <aside class="summary" aria-label="Resumen del pedido">
+          <h2>Tu pedido</h2>
+          <ul class="summary-lines">${lines.map(l => `
+            <li>
+              <span class="thumb"><img src="${esc(productImage(l.product))}" alt="" width="56" height="74"><b>${l.qty}</b></span>
+              <span><strong>${esc(l.product.name)}</strong><small>Ref. ${esc(l.product.ref)} · ${esc(l.variant.color)} · Talla ${esc(l.variant.size)}</small></span>
+              <span>${cop(l.unitPrice * l.qty)}</span>
+            </li>`).join('')}</ul>
+          <div class="row-between"><span>Subtotal</span><span>${cop(totals.subtotal)}</span></div>
+          ${totals.discount ? `<div class="row-between discount"><span>Descuento (${esc(promo.code)})</span><span>− ${cop(totals.discount)}</span></div>` : ''}
+          <div class="row-between"><span>${delivery === 'pickup' ? 'Recoger en tienda' : 'Envío'}</span><span>${totals.shipping ? cop(totals.shipping) : 'Gratis'}</span></div>
+          <div class="row-between total"><span>Total</span><span>${cop(totals.total)}</span></div>
+          <a class="btn btn-ghost btn-sm" href="carrito.html">← Editar carrito</a>
+        </aside>
+      </div>`;
+    root.querySelectorAll('input[name=method]').forEach(r => r.addEventListener('change', () => { delivery = r.value; draw(); }));
+  };
+  draw();
 }
