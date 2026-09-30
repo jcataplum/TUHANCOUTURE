@@ -54,15 +54,17 @@ Todo está en [`js/config.js`](js/config.js). Lo que dice `null` se oculta en la
 
 ### 1. Supabase (base de datos)
 
-1. Crear un proyecto en [supabase.com](https://supabase.com).
-2. Ejecutar [`supabase/migrations/20260930000000_tuhan_store.sql`](supabase/migrations/20260930000000_tuhan_store.sql) en el SQL Editor (o `supabase db push`).
+Proyecto creado: **TUHAN COUTURE** (`vfyqwgrywcmxddutwhur`, región us-east-1, plan gratuito) con la migración [`supabase/migrations/20260930000000_tuhan_store.sql`](supabase/migrations/20260930000000_tuhan_store.sql) ya aplicada. En el plan gratuito el proyecto se pausa tras 7 días sin actividad; se reactiva desde el panel de Supabase.
+
+1. ~~Crear un proyecto en Supabase~~ ✔
+2. ~~Ejecutar la migración~~ ✔
 3. Crear la cuenta de administración en *Authentication → Users → Add user* y darle permisos:
    ```sql
    insert into public.admins (user_id) select id from auth.users where email = 'correo-admin@...';
    ```
 4. En *Authentication → Settings*, **desactivar el registro público** ("Allow new users to sign up"): solo el equipo usa cuentas.
 5. Ajustar envío en la tabla `store_settings` para que coincida con `js/config.js`.
-6. En `js/config.js`: `backend.mode = 'supabase'`, `supabaseUrl` y `supabaseAnonKey` (clave pública).
+6. En `js/config.js` ya están `supabaseUrl` y `supabaseAnonKey`; solo falta cambiar `backend.mode` a `'supabase'` cuando haya productos y pagos configurados.
 7. Cargar los productos reales desde `admin.html`.
 
 ### 2. Wompi (pagos: tarjetas, PSE, Nequi, Botón Bancolombia, etc.)
