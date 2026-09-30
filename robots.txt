@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /checkout.html
+Disallow: /pedido.html
+Disallow: /carrito.html
+Disallow: /cuenta.html
+# Cuando exista el dominio final, agregar:
+# Sitemap: https://www.tudominio.com/sitemap.xml

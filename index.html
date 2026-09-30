@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; frame-src https://checkout.wompi.co; form-action 'self' https://checkout.wompi.co; base-uri 'self'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>TUHAN COUTURE · Jeans de marca 100% colombiana</title>
+  <meta name="description" content="TUHAN COUTURE: jeans y denim de marca 100% colombiana. Wide leg, baggy, flare y más. Envíos a todo Colombia y tienda física en el C.C. Estación Niquía.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0c0b09">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="TUHAN COUTURE">
+  <meta property="og:title" content="TUHAN COUTURE · Jeans de marca 100% colombiana">
+  <meta property="og:description" content="TUHAN COUTURE: jeans y denim de marca 100% colombiana. Wide leg, baggy, flare y más. Envíos a todo Colombia y tienda física en el C.C. Estación Niquía.">
+  <meta property="og:image" content="assets/img/logo-tuhan.jpeg">
+  <link rel="icon" href="assets/img/logo-tuhan.jpeg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="assets/img/logo-tuhan.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Pinyon+Script&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header id="site-header"></header>
+  <main id="main" tabindex="-1">
+
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-media" id="heroMedia"><div class="hero-art"></div></div>
+      <div class="hero-frame" aria-hidden="true"></div>
+      <div class="container">
+        <div class="hero-content">
+          <p class="eyebrow" style="color:var(--gold-2)">Marca 100% colombiana</p>
+          <p class="script">Nueva Colección</p>
+          <h1 id="heroTitle">Denim que resalta tu esencia</h1>
+          <p>Jeans con horma pensada para ti: tiro alto, siluetas amplias y acabados couture. No te la pierdas.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="catalogo.html">Comprar ahora</a>
+            <a class="btn btn-line-light" href="catalogo.html?coleccion=nueva">Ver colección</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="values" aria-label="Por qué comprar en TUHAN COUTURE">
+      <div class="reveal"><span data-icon="truck"></span><div><h3>Envíos a todo el país</h3><p id="valShipping">Recíbelo en la puerta de tu casa.</p></div></div>
+      <div class="reveal"><span data-icon="store"></span><div><h3>Tienda física</h3><p id="valStore">Visítanos y mídetelos.</p></div></div>
+      <div class="reveal"><span data-icon="shield"></span><div><h3>Pago seguro</h3><p>Tarjetas, PSE, Nequi y más medios.</p></div></div>
+    </section>
+
+    <section class="section" aria-labelledby="featuredTitle">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Favoritos de nuestras clientas</p><h2 id="featuredTitle">Destacados</h2></div>
+          <a class="link" href="catalogo.html">Ver todo el catálogo</a>
+        </div>
+        <div class="grid-products cols-4" id="featuredGrid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section section-sand" aria-labelledby="newTitle">
+      <div class="container collection-split">
+        <a class="collection-banner reveal" href="catalogo.html?coleccion=nueva" id="newBanner">
+          <div class="hero-frame" aria-hidden="true"></div>
+          <div>
+            <p class="script">Nueva Colección</p>
+            <p class="eyebrow" style="color:var(--gold-2)">No te la pierdas</p>
+            <span class="btn btn-line-light btn-sm">Ver colección</span>
+          </div>
+        </a>
+        <div>
+          <div class="section-head reveal">
+            <div><p class="eyebrow">Recién llegados</p><h2 id="newTitle">Nueva colección</h2></div>
+            <a class="link" href="catalogo.html?coleccion=nueva">Comprar la colección</a>
+          </div>
+          <div class="grid-products" id="newGrid" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="tienda" aria-labelledby="storeTitle">
+      <div class="container collection-split">
+        <div class="reveal">
+          <p class="script">Visítanos</p>
+          <h2 id="storeTitle">Nuestra tienda física</h2>
+          <div id="storeInfo"></div>
+        </div>
+        <div class="reveal" id="storeCta"></div>
+      </div>
+    </section>
+
+  </main>
+  <footer id="site-footer"></footer>
+  <noscript><p style="padding:16px;text-align:center">Activa JavaScript para comprar en la tienda.</p></noscript>
+  <script type="module" src="js/pages/home.js?v=1"></script>
+</body>
+</html>
